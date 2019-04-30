@@ -1,11 +1,11 @@
 ﻿using System;
-
+using NLog;
 
 namespace CigarShop.ConsoleUI
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Cigar Shop Online Store");
         }
