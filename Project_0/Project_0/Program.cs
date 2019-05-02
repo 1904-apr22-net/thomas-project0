@@ -1,13 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security;
+using System.Xml.Serialization;
+using CigarShop.Library.Interfaces;
 using NLog;
 
 namespace CigarShop.ConsoleUI
 {
-    public static class Program
+       public static class Program
     {
+        private static readonly ILogger _interfaceLogger = LogManager.GetCurrentClassLogger();
         public static void Main(string[] args)
         {
-            Console.WriteLine("Cigar Shop Online Store");
+            ICigarShop cigarShop = CreateCigarShop();
+            XmlSerializer serializer = CreateXmlSerializer();
         }
     }
 }

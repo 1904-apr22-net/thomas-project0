@@ -34,5 +34,7 @@ namespace CigarShop.Library.Models
                 _mName = value;
             }
         }
+        public int cID { get; set; }
+        public int mID { get; set; }
     }
 }

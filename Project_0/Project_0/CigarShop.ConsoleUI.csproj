@@ -10,4 +10,8 @@
     <PackageReference Include="NLog.Schema" Version="4.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CigarShop.Library\CigarShop.Library.csproj" />
+  </ItemGroup>
+
 </Project>

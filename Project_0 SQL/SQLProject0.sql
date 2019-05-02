@@ -1,0 +1,30 @@
+CREATE DATABASE Project0;
+
+GO
+CREATE SCHEMA Cigar;
+GO
+
+CREATE TABLE Cigar.Cigar(
+	Id INT NOT NULL IDENTITY,
+	Name NVARCHAR(200) NOT NULL,
+	DateModified DATETIME2 NOT NULL DEFAULT(GETDATE()),
+	Active BIT NOT NULL DEFAULT(1),
+	CONSTRAINT PK_CigarId PRIMARY KEY (Id),
+	--CONSTRAINT U_Name_ManufacturerId UNIQUE (Name, ManufacturerId)
+	);
+
+CREATE TABLE Cigar.Manufacturer(
+	Id INT NOT NULL IDENTITY,
+	Name NVARCHAR(200) NOT NULL,
+	DateModified DATETIME2 NOT NULL DEFAULT(GETDATE()),
+	Active BIT NOT NULL DEFAULT(1),
+	CONSTRAINT PK_ManufacturerId PRIMARY KEY (Id),
+	);
+
+ALTER TABLE Cigar.Cigar ADD
+	ManufacturerId INT NOT NULL DEFAULT(1),
+	CONSTRAINT FK_Cigar_Manufacturer FOREIGN KEY (ManufacturerId) REFERENCES Cigar.Manufacturer (Id);
+
+ALTER TABLE Cigar.Manufacturer ADD
+	Location NVARCHAR(100) NOT NULL DEFAULT('unknown');
+
