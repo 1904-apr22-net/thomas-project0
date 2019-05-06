@@ -97,3 +97,18 @@ ALTER TABLE Cigar.Customer ADD
 	DefaultStoreId INT NOT NULL DEFAULT(0),
 	CONSTRAINT FK_Customer_Store FOREIGN KEY (DefaultStoreId) REFERENCES Cigar.Store (Id);
 
+CREATE TABLE Cigar.OrderItems(
+Quantity INT not null DEFAULT(1),
+OrderId INT,
+ProductId INT,
+CONSTRAINT FK_OrderItems_Orders FOREIGN KEY (OrderId) REFERENCES Cigar.Orders (Id),
+CONSTRAINT FK_OrderItems_Products FOREIGN KEY (ProductId) REFERENCES Cigar.Cigar (Id)
+)
+
+CREATE TABLE Cigar.InvintoryItem(
+Quantity INT not null DEFAULT(1),
+StoreId INT,
+ProductId INT,
+CONSTRAINT FK_InvintoryItems_Store FOREIGN KEY (StoreId) REFERENCES Cigar.Store (Id),
+CONSTRAINT FK_InvintoryItems_Products FOREIGN KEY (ProductId) REFERENCES Cigar.Cigar (Id)
+)
