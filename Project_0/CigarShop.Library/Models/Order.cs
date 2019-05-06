@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CigarShop.Library.Models
 {
-    class Order
+    public class Order
     {
         private int _OrderId;
         public int orderId
