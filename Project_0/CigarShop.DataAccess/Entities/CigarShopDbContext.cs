@@ -8,5 +8,14 @@ namespace CigarShop.DataAccess.Entities
 {
     public partial class CigarShopDbContext : DbContext
     {
+        public CigarShopDbContext()
+        {
+        }
+
+        public CigarShopDbContext(DbContextOptions<CigarShopDbContext> options)
+            : base(options)
+        {
+        }
+
     }
 }

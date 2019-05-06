@@ -8,11 +8,16 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NLog" Version="4.6.2" />
     <PackageReference Include="NLog.Schema" Version="4.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CigarShop.DataAccess\CigarShop.DataAccess.csproj" />
     <ProjectReference Include="..\CigarShop.Library\CigarShop.Library.csproj" />
   </ItemGroup>
 

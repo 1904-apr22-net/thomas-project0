@@ -23,5 +23,7 @@ namespace CigarShop.Library.Models
 
         private string _Zip;
         public string zip { get; set; }
+
+        //public List<Cigars> Cigars { get; set; } = new List<Cigar>
     }
 }
