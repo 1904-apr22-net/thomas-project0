@@ -9,6 +9,7 @@ namespace CigarShop.Library.Models
     {
         private string _cName; //name of cigar
         private string _mName; //name of manufacturer
+        private string _BodyCharacteristic; //will either be light, medium, or full. 
 
         public string cName
         {
@@ -32,6 +33,18 @@ namespace CigarShop.Library.Models
                     throw new ArgumentException("Manufacturer name must not be empty", nameof(value));
                 }
                 _mName = value;
+            }
+        }
+        public string bodyCharacteristic
+        {
+            get => _BodyCharacteristic;
+            set
+            {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("What is the body characteristic of the cigar? ", nameof(value));
+                }
+                _BodyCharacteristic = value;
             }
         }
         public int cID { get; set; }

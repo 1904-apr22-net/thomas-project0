@@ -6,6 +6,7 @@ using System.Security;
 using System.Xml.Serialization;
 using CigarShop.Library.Interfaces;
 using NLog;
+using CigarShop.Library.Models;
 
 namespace CigarShop.ConsoleUI
 {
