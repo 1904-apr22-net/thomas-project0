@@ -7,10 +7,17 @@ namespace CigarShop.Library.Models
 {
     public class Cigar
     {
+        private int _cId; //id of cigar
         private string _cName; //name of cigar
         private string _mName; //name of manufacturer
         private string _BodyCharacteristic; //will either be light, medium, or full. 
+        private int _mId; //id of manufacturer
 
+        public int cId
+        {
+            get => _cId;
+            set => _cId = value;
+        }
         public string cName
         {
             get => _cName;
@@ -47,7 +54,10 @@ namespace CigarShop.Library.Models
                 _BodyCharacteristic = value;
             }
         }
-        public int cID { get; set; }
-        public int mID { get; set; }
+        public int mID
+        {
+            get => _mId;
+            set => _mId = value;
+        }
     }
 }

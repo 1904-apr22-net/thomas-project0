@@ -10,7 +10,6 @@ CREATE TABLE Cigar.Cigar(
 	DateModified DATETIME2 NOT NULL DEFAULT(GETDATE()),
 	Active BIT NOT NULL DEFAULT(1),
 	CONSTRAINT PK_CigarId PRIMARY KEY (Id),
-	--CONSTRAINT U_Name_ManufacturerId UNIQUE (Name, ManufacturerId)
 	);
 
 CREATE TABLE Cigar.Manufacturer(
@@ -42,16 +41,6 @@ CREATE TABLE Cigar.CigarBodyChar(
 ALTER TABLE Cigar.Cigar ADD
 	BodyId INT NOT NULL DEFAULT(0),
 	CONSTRAINT FK_Cigar_CigarBodyChar FOREIGN KEY (BodyId) REFERENCES Cigar.CigarBodyChar (Id);
-
-GO
-CREATE TRIGGER Cigar.MovieDateModified ON Cigar.Cigar
-AFTER UPDATE
-AS
-BEGIN
-	UPDATE Cigar.Cigar
-	SET DateModified = GETDATE()
-	WHERE Id IN (SELECT Id FROM Inserted);
-END
 
 CREATE TABLE Cigar.Customer(
 	Id INT NOT NULL IDENTITY,
@@ -112,3 +101,54 @@ ProductId INT,
 CONSTRAINT FK_InvintoryItems_Store FOREIGN KEY (StoreId) REFERENCES Cigar.Store (Id),
 CONSTRAINT FK_InvintoryItems_Products FOREIGN KEY (ProductId) REFERENCES Cigar.Cigar (Id)
 )
+
+GO
+CREATE TRIGGER Cigar.CigarDateModified ON Cigar.Cigar
+AFTER UPDATE
+AS
+BEGIN
+	UPDATE Cigar.Cigar
+	SET DateModified = GETDATE()
+	WHERE Id IN (SELECT Id FROM Inserted);
+END
+
+GO
+CREATE TRIGGER Cigar.CustomerDateModified ON Cigar.Customer
+AFTER UPDATE
+AS
+BEGIN
+	UPDATE Cigar.Customer
+	SET DateModified = GETDATE()
+	WHERE Id IN (SELECT Id FROM Inserted);
+END
+
+GO
+CREATE TRIGGER Cigar.ManufacturerDateModified ON Cigar.Manufacturer
+AFTER UPDATE
+AS
+BEGIN
+	UPDATE Cigar.Manufacturer
+	SET DateModified = GETDATE()
+	WHERE Id IN (SELECT Id FROM Inserted);
+END
+
+GO
+CREATE TRIGGER Cigar.OrdersDateModified ON Cigar.Orders
+AFTER UPDATE
+AS
+BEGIN
+	UPDATE Cigar.Orders
+	SET DateModified = GETDATE()
+	WHERE Id IN (SELECT Id FROM Inserted);
+END
+
+GO
+CREATE TRIGGER Cigar.StoreDateModified ON Cigar.Store
+AFTER UPDATE
+AS
+BEGIN
+	UPDATE Cigar.Store
+	SET DateModified = GETDATE()
+	WHERE Id IN (SELECT Id FROM Inserted);
+END
+

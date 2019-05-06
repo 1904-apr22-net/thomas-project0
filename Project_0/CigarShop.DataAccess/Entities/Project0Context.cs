@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -12,6 +13,10 @@ namespace CigarShop.DataAccess.Entities
 
         public Project0Context(DbContextOptions<Project0Context> options)
             : base(options)
+        {
+        }
+
+        public Project0Context([NotNullAttribute] DbContextOptions options) : base(options)
         {
         }
 
