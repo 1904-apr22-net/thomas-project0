@@ -16,7 +16,7 @@ namespace CigarShop.DataAccess.Entities
         {
         }
 
-        public Project0Context([NotNullAttribute] DbContextOptions options) : base(options)
+        public Project0Context(DbContextOptions options) : base(options)
         {
         }
 

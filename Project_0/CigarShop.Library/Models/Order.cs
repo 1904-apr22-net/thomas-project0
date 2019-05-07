@@ -7,14 +7,7 @@ namespace CigarShop.Library.Models
     public class Order
     {
         private int _OrderId;
-        public int orderId
-        {
-            get => _OrderId;
-            set
-            {
-                    _OrderId = value;
-            }
-        }
+        public int orderId { get; set; }
 
         public int storeId { get; set; }
 

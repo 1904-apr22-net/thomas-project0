@@ -22,11 +22,11 @@ namespace CigarShop.ConsoleUI
         {
             using (Project0Context dbContext = CreateDbContext())
             {
-                UI();
+                ExecuteUI();
             }
         }
 
-        public static void UI()
+        public static void ExecuteUI()
         {
             Console.WriteLine("Cigar Shop");
             Console.WriteLine();

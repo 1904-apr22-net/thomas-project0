@@ -7,39 +7,34 @@ namespace CigarShop.Library.Models
 {
     public class Cigar
     {
-        private int _cId; //id of cigar
-        private string _cName; //name of cigar
-        private string _mName; //name of manufacturer
+        private int _CigarId; //id of cigar
+        private string _CigarName; //name of cigar
+        private string _ManufacturerName; //name of manufacturer
         private string _BodyCharacteristic; //will either be light, medium, or full. 
-        private int _mId; //id of manufacturer
 
-        public int cId
+        public int cigarId   { get; set; }
+        public string cigarName
         {
-            get => _cId;
-            set => _cId = value;
-        }
-        public string cName
-        {
-            get => _cName;
+            get => _CigarName;
             set
             {
                 if (value.Length == 0)
                 {
                     throw new ArgumentException("Cigar name must not be empty", nameof(value));
                 }
-                _cName = value;
+                _CigarName = value;
             }
         }
-        public string mName
+        public string manufacturerName
         {
-            get => _mName;
+            get => _ManufacturerName;
             set
             {
                 if (value.Length == 0)
                 {
                     throw new ArgumentException("Manufacturer name must not be empty", nameof(value));
                 }
-                _mName = value;
+                _ManufacturerName = value;
             }
         }
         public string bodyCharacteristic
@@ -49,15 +44,10 @@ namespace CigarShop.Library.Models
             {
                 if (value.Length == 0)
                 {
-                    throw new ArgumentException("What is the body characteristic of the cigar? ", nameof(value));
+                    throw new ArgumentException("Body Characteristic must not be empty", nameof(value));
                 }
                 _BodyCharacteristic = value;
             }
-        }
-        public int mID
-        {
-            get => _mId;
-            set => _mId = value;
         }
     }
 }

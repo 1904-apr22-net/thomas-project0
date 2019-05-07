@@ -7,20 +7,17 @@ namespace CigarShop.Library.Models
     public class Customer
     {
         private int _CustomerId;
-        public int customerId
-        {
-            get => _CustomerId;
-            set
-            {
-                _CustomerId = value;
-            }
-        }
+        public int customerId   { get; set; }
         private string _FirstName;
         public string firstName
         {
             get => _FirstName;
             set
             {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("First name must not be empty", nameof(value));
+                }
                 _FirstName = value;
             }
         }
@@ -31,6 +28,10 @@ namespace CigarShop.Library.Models
             get => _LastName;
             set
             {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("Last name must not be empty", nameof(value));
+                }
                 _LastName = value;
             }
         }
@@ -42,19 +43,16 @@ namespace CigarShop.Library.Models
             get => _Address1;
             set
             {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("Address 1 must not be empty", nameof(value));
+                }
                 _Address1 = value;
             }
         }
 
         private string _Address2;
-        public string address2
-        {
-            get => _Address2;
-            set
-            {
-                _Address2 = value;
-            }
-        }
+        public string address2 { get; set; }
 
         private string _City;
         public string city
@@ -62,6 +60,10 @@ namespace CigarShop.Library.Models
             get => _City;
             set
             {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("City must not be empty", nameof(value));
+                }
                 _City = value;
             }
         }
@@ -72,6 +74,10 @@ namespace CigarShop.Library.Models
             get => _State;
             set
             {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("State must not be empty", nameof(value));
+                }
                 _State = value;
             }
         }
@@ -82,6 +88,10 @@ namespace CigarShop.Library.Models
             get => _Zip;
             set
             {
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("Zip code must not be empty", nameof(value));
+                }
                 _Zip = value;
             }
         }
@@ -92,10 +102,12 @@ namespace CigarShop.Library.Models
             get => _DefaultStoreCity;
             set
             {
-                _DefaultStoreCity= value;
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException("Preferred store must not be empty", nameof(value));
+                }
+                _DefaultStoreCity = value;
             }
         }
-
-        public int orderId { get; set; }
     }
 }
