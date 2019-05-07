@@ -20,24 +20,25 @@ namespace CigarShop.ConsoleUI
         private static readonly ILogger _interfaceLogger = LogManager.GetCurrentClassLogger();
         public static void Main(string[] args)
         {
-            using (Project0Context dbContext = CreateDbContext())
+            XmlSerializer serializer = Dependencies.CreateXmlSerializer();
+
+            using ( ICigarShop cigarShopRepo = Dependencies.CreateCigarShopRepo())//Project0Context dbContext = CreateDbContext())
             {
-                ExecuteUI();
+                ExecuteUI(cigarShopRepo, serializer);
             }
         }
 
-        public static void ExecuteUI()
+        public static void ExecuteUI(ICigarShop cigarShopRepo, XmlSerializer serializer)
         {
-            Console.WriteLine("Cigar Shop");
+            Console.WriteLine("Winston Churchill's Cigars");
             Console.WriteLine();
 
             while (true)
             {
-                Console.WriteLine("o: View/Order Cigars");
-                Console.WriteLine("e: View/Edit Exiting Order");
-                Console.WriteLine("s: Manage Store Locations");
-                Console.WriteLine("i: Manage Cigar Invintory");
-                Console.WriteLine("c: Manage Customers");
+                Console.WriteLine("o: Order Cigars");
+                Console.WriteLine("e: View Exiting Order");
+                Console.WriteLine("c: Customer Lookup");
+                Console.WriteLine("s: Store Lookup");
                 Console.WriteLine("q: close program");
                 Console.WriteLine();
                 Console.WriteLine("Please enter one of the specified menu options. ");
@@ -168,10 +169,7 @@ namespace CigarShop.ConsoleUI
                         }
                     }
                 }
-                else if (userInput == "i")
-                {
 
-                }
                 else if (userInput == "c")
                 {
                     

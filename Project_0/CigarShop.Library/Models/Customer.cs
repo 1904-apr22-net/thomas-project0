@@ -8,6 +8,7 @@ namespace CigarShop.Library.Models
     {
         private int _CustomerId;
         public int customerId   { get; set; }
+
         private string _FirstName;
         public string firstName
         {
