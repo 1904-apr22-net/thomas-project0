@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security;
-using System.Xml.Serialization;
 using CigarShop.Library.Interfaces;
 using NLog;
 using CigarShop.Library.Models;
@@ -12,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using ILogger = NLog.ILogger;
+using System.Xml.Serialization;
 
 namespace CigarShop.ConsoleUI
 {
@@ -20,15 +20,15 @@ namespace CigarShop.ConsoleUI
         private static readonly ILogger _interfaceLogger = LogManager.GetCurrentClassLogger();
         public static void Main(string[] args)
         {
-            XmlSerializer serializer = Dependencies.CreateXmlSerializer();
-
-            using ( ICigarShop cigarShopRepo = Dependencies.CreateCigarShopRepo())//Project0Context dbContext = CreateDbContext())
+            // XmlSerializer serializer = Dependencies.CreateXmlSerializer();
+           // ICigarShop cigarShopRepository = Dependencies.CreateCigarShopRepository();
+            using (Project0Context dbContext = CreateDbContext())//ICigarShop cigarShopRepo = Dependencies.CreateCigarShopRepo())//
             {
-                ExecuteUI(cigarShopRepo, serializer);
+                ExecuteUI();// cigarShopRepository);
             }
         }
 
-        public static void ExecuteUI(ICigarShop cigarShopRepo, XmlSerializer serializer)
+        public static void ExecuteUI() //ICigarShop cigarShopRepo)
         {
             Console.WriteLine("Winston Churchill's Cigars");
             Console.WriteLine();
