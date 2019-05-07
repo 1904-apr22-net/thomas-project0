@@ -81,9 +81,8 @@ ALTER TABLE Cigar.Orders ADD
 	CustomerId INT NOT NULL DEFAULT(0),
 	CONSTRAINT FK_Orders_Customer FOREIGN KEY (CustomerId) REFERENCES Cigar.Customer (Id);
 
-
+	
 ALTER TABLE Cigar.Customer ADD
-	DefaultStoreId INT NOT NULL DEFAULT(0),
 	CONSTRAINT FK_Customer_Store FOREIGN KEY (DefaultStoreId) REFERENCES Cigar.Store (Id);
 
 CREATE TABLE Cigar.OrderItems(
@@ -152,3 +151,54 @@ BEGIN
 	WHERE Id IN (SELECT Id FROM Inserted);
 END
 
+
+INSERT INTO Cigar.Manufacturer (Name) VALUES
+('Drew Estates'),
+('Arturo Fuente'),
+('Romeo y Julieta'),
+('Macanudo'),
+('AJ Fernandez'),
+('My Father'),
+('Camacho')
+
+INSERT INTO Cigar.CigarBodyChar (Body) VALUES
+('Mild'),
+('Medium'),
+('Full')
+
+INSERT INTO Cigar.Cigar (Name, ManufacturerId, BodyId) VALUES
+('Liga Privada No 9', 1, 3),
+('Liga Privada T 52', 1, 3),
+('Undrcrown Sun Grown', 1, 3),
+('Undrcrown Maduro', 1, 3),
+('Undrcrown Shade', 1, 1),
+('858 Maduro', 2, 3),
+('858 Natural', 2, 2),
+('Gran Reserva', 2, 2),
+('Romeo Anejo', 3, 3),
+('1875', 3, 2),
+('Reserva Real', 3, 2),
+('Cafe', 4, 1),
+('M', 4, 2),
+('New World', 5, 3 ),
+('Bellas Artes', 5, 2),
+('Last Call', 5, 2),
+('El Centurion', 6, 3),
+('Jaime Garcia', 6, 2),
+('The Judge', 6, 3),
+('Triple Maduro', 7, 3),
+('Connecticut', 7, 1),
+('American Barrel Aged', 7, 2)
+
+INSERT INTO Cigar.Store (Address1, Address2, City, State, ZipCode) VALUES
+('123 Lazier Ln', 'Bldg 3A', 'Made Up', 'Texas', 76123),
+('321 In a Crunch St', 'Bldg 5B', 'Desert', 'Arizona', 12345)
+
+INSERT INTO Cigar.Customer (FirstName, LastName, Address1, Address2, City, State, ZipCode, DefaultStore, DefaultStoreId) VALUES
+('John', 'Smith', '123 Lazy Ln','', 'Made Up', 'Texas', 76123, 'Winston Churchill Cigars', 1),
+('Jane', 'Doe', '987 No Grass Ct','', 'Desert', 'Arizona', 12345, 'Winston Churchill Cigars', 2),
+('Bobby', 'Quicktruck', '345 Weather Forcast Joke Dr','', 'Made Up', 'Texas', 76123, 'Winston Churchill Cigars', 1),
+('Duke', 'Zeppelin', '789 Also No Water St','', 'Desert', 'Arizona', 12345, 'Winston Churchill Cigars', 2)
+
+SELECT * 
+FROM Cigar.Customer

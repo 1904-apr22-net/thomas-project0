@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -16,10 +15,6 @@ namespace CigarShop.DataAccess.Entities
         {
         }
 
-        public Project0Context(DbContextOptions options) : base(options)
-        {
-        }
-
         public virtual DbSet<Cigar> Cigar { get; set; }
         public virtual DbSet<CigarBodyChar> CigarBodyChar { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
@@ -27,6 +22,8 @@ namespace CigarShop.DataAccess.Entities
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Store> Store { get; set; }
 
+        // Unable to generate entity type for table 'Cigar.OrderItems'. Please see the warning messages.
+        // Unable to generate entity type for table 'Cigar.InvintoryItem'. Please see the warning messages.
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -66,15 +63,9 @@ namespace CigarShop.DataAccess.Entities
             {
                 entity.ToTable("CigarBodyChar", "Cigar");
 
-                entity.Property(e => e.Active)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.Body)
                     .IsRequired()
                     .HasMaxLength(200);
-
-                entity.Property(e => e.DateModified).HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -118,12 +109,6 @@ namespace CigarShop.DataAccess.Entities
                 entity.Property(e => e.ZipCode)
                     .IsRequired()
                     .HasMaxLength(200);
-
-                entity.HasOne(d => d.DefaultStoreNavigation)
-                    .WithMany(p => p.Customer)
-                    .HasForeignKey(d => d.DefaultStoreId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Customer_Store");
             });
 
             modelBuilder.Entity<Manufacturer>(entity =>

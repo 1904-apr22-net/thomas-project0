@@ -23,7 +23,6 @@ namespace CigarShop.DataAccess.Entities
         public bool? Active { get; set; }
         public int DefaultStoreId { get; set; }
 
-        public virtual Store DefaultStoreNavigation { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

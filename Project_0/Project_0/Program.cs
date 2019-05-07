@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using ILogger = NLog.ILogger;
 using System.Xml.Serialization;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace CigarShop.ConsoleUI
 {
@@ -20,8 +22,9 @@ namespace CigarShop.ConsoleUI
         private static readonly ILogger _interfaceLogger = LogManager.GetCurrentClassLogger();
         public static void Main(string[] args)
         {
+            
             // XmlSerializer serializer = Dependencies.CreateXmlSerializer();
-           // ICigarShop cigarShopRepository = Dependencies.CreateCigarShopRepository();
+            // ICigarShop cigarShopRepository = Dependencies.CreateCigarShopRepository();
             using (Project0Context dbContext = CreateDbContext())//ICigarShop cigarShopRepo = Dependencies.CreateCigarShopRepo())//
             {
                 ExecuteUI();// cigarShopRepository);
@@ -48,30 +51,41 @@ namespace CigarShop.ConsoleUI
                 {
                     while (true)
                     {
-                        Console.WriteLine("i: Lookup Cigar by Id Number");
                         Console.WriteLine("n: Lookup Cigar by Name");
-                        Console.WriteLine("d: Lookup Cigar by Manufacturer's Id number");
                         Console.WriteLine("m: Lookup Cigar by Manufacturer's Name");
                         Console.WriteLine("b: Go Back");
                         Console.WriteLine();
                         Console.WriteLine("Please enter one of the specified menu options. ");
                         userInput = Console.ReadLine();
 
-                        if (userInput == "i")
-                        {
-                            Console.WriteLine("Please enter the Cigar's Id Number");
-                            userInput = Console.ReadLine();
-                        }
-                        else if (userInput == "n")
+
+                        if (userInput == "n")
                         {
                             Console.WriteLine("Please enter the Cigar's Name");
                             userInput = Console.ReadLine();
+                            var commString = $"SELECT * FROM Cigar.Cigar WHERE Name = {userInput};";
+                            var connectionString = SecretConfiguration.ConnectionString;
+                            var dataSet = new DataSet();
+                            using (var connection = new SqlConnection(connectionString))
+                            {
+                                connection.Open();
+
+                                using (var command = new SqlCommand(commString, connection))
+                                using (var adapter = new SqlDataAdapter(command))
+                                {
+                                    adapter.Fill(dataSet);
+                                }
+
+                                connection.Close();
+                            }
+                            foreach (DataRow row in dataSet.Tables[0].Rows)
+                            {
+                                DataColumn idColumn = dataSet.Tables[0].Columns["Cigars"];
+
+                                Console.WriteLine($"Cigar #{row[idColumn]}: {row["Cigar Name"]}");
+                            }
                         }
-                        else if (userInput == "d")
-                        {
-                            Console.WriteLine("Please enter the Manufactuer's Id Number");
-                            userInput = Console.ReadLine();
-                        }
+
                         else if (userInput =="m")
                         {
                             Console.WriteLine("Please enter the Manufactuer's Name");
@@ -181,6 +195,7 @@ namespace CigarShop.ConsoleUI
             }
 
         }
+
         private static Project0Context CreateDbContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<Project0Context>();

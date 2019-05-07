@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CigarShop.DataAccess.CigarShopRepository
 {
-    public class CigarShopRepository : ICigarShop
+    public class CigarShopRepository //: ICigarShop
     {
         private readonly Project0Context _dbContext;
 

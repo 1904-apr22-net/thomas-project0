@@ -19,7 +19,7 @@ namespace CigarShop.ConsoleUI
 
             var dbContext = new Project0Context(optionsBuilder.Options);
 
-            return new CigarShopRepository(dbContext);
+            return null; //new CigarShopRepository(dbContext);
         }
 
         public static XmlSerializer CreateXmlSerializer() =>

@@ -12,8 +12,6 @@ namespace CigarShop.DataAccess.Entities
 
         public int Id { get; set; }
         public string Body { get; set; }
-        public DateTime DateModified { get; set; }
-        public bool? Active { get; set; }
 
         public virtual ICollection<Cigar> Cigar { get; set; }
     }
