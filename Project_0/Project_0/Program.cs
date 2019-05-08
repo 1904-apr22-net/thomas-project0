@@ -63,7 +63,7 @@ namespace CigarShop.ConsoleUI
                         {
                             Console.WriteLine("Please enter the Cigar's Name");
                             userInput = Console.ReadLine();
-                            var commString = $"SELECT * FROM Cigar.Cigar WHERE Name = {userInput};";
+                            var commString = $"SELECT Cigar.Id, Cigar.Name, CigarBodyChar.Body, Manufacturer.Name FROM Cigar.Cigar INNER Join Cigar.CigarBodyChar on Cigar.Cigar.BodyId = CigarBodyChar.Id INNER Join Cigar.Manufacturer on Cigar.Cigar.ManufacturerId = Manufacturer.Id WHERE Cigar.Name = '{ userInput}';";
                             var connectionString = SecretConfiguration.ConnectionString;
                             var dataSet = new DataSet();
                             using (var connection = new SqlConnection(connectionString))
@@ -78,12 +78,18 @@ namespace CigarShop.ConsoleUI
 
                                 connection.Close();
                             }
-                            foreach (DataRow row in dataSet.Tables[0].Rows)
+                            foreach(DataTable table in dataSet.Tables)
                             {
-                                DataColumn idColumn = dataSet.Tables[0].Columns["Cigars"];
-
-                                Console.WriteLine($"Cigar #{row[idColumn]}: {row["Cigar Name"]}");
+                                foreach(DataRow row in table.Rows)
+                                {
+                                    foreach (DataColumn column in table.Columns)
+                                    {
+                                        Console.WriteLine("    "+column.ColumnName+ "   "+row[column]);
+                                    }
+                                }
                             }
+                            Console.WriteLine();
+ 
                         }
 
                         else if (userInput =="m")
