@@ -200,5 +200,12 @@ INSERT INTO Cigar.Customer (FirstName, LastName, Address1, Address2, City, State
 ('Bobby', 'Quicktruck', '345 Weather Forcast Joke Dr','', 'Made Up', 'Texas', 76123, 'Winston Churchill Cigars', 1),
 ('Duke', 'Zeppelin', '789 Also No Water St','', 'Desert', 'Arizona', 12345, 'Winston Churchill Cigars', 2)
 
-SELECT * 
+select * 
 FROM Cigar.Customer
+
+SELECT Cigar.Id, Cigar.Name, CigarBodyChar.Body, Manufacturer.Name
+FROM Cigar.Cigar 
+INNER Join Cigar.CigarBodyChar on Cigar.Cigar.BodyId = CigarBodyChar.Id
+INNER Join Cigar.Manufacturer on Cigar.Cigar.ManufacturerId = Manufacturer.Id
+WHERE Cigar.Name = 'm'
+
