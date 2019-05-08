@@ -209,3 +209,5 @@ INNER Join Cigar.CigarBodyChar on Cigar.Cigar.BodyId = CigarBodyChar.Id
 INNER Join Cigar.Manufacturer on Cigar.Cigar.ManufacturerId = Manufacturer.Id
 WHERE Cigar.Name = 'm'
 
+SELECT * FROM Cigar.Customer WHERE FirstName = 'John' AND LastName = 'Smith';
+SELECT * FROM Cigar.Store WHERE Store.Id = 3
